@@ -41,6 +41,7 @@ Those markdown notes that contains external resources such pictures or files, ar
  - ```--skip-creation-time```, does not include creation time into metadata section
  - ```--skip-update-time```, does not include update time into metadata section
  - ```--skip-tags``` , does not include tags into metadata section
+ - ```--tags-as-links``` , turn Evernote tags into linked pages
  - ```--outputFormat```, generates internal file links and highlights in Obsidian-style: highlights are going to be bounded by `==` instead of \` characters, file links are going to be as follows: `![[file-name]]` instead of `![file-name](file-name)`. Possible values: `ObsidianMD` to get Obsidian-style notes, `StandardMD` or skip it completely, if you prefere Standard Markdown format. 
        
 

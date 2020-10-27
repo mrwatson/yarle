@@ -42,14 +42,24 @@ export const logLatLong = (note: any): string => {
 export const logTags = (note: any): string => {
 
   if (!yarleOptions.skipTags && note.tag) {
-    const tagArray = Array.isArray(note.tag) ? note.tag : [note.tag];
-    const tags = tagArray.map((tag: any) => {
-      const cleanTag = tag.toString().replace(/ /g, '-');
+    if (yarleOptions.tagsAsLinks) {
+      const tagArray = Array.isArray(note.tag) ? note.tag : [note.tag];
+      const tags = tagArray.map((tag: any) => {
+        return `[[${tag.toString()}]]`
+      })
 
-      return cleanTag.startsWith('#') ? cleanTag : `#${cleanTag}`;
-    });
+      return `${EOL}${TAG_SECTION_SEPARATOR}${EOL}Links: ${tags.join(' ')}${EOL}${EOL}${TAG_SECTION_SEPARATOR}${EOL}${EOL}`
+    } else {
+      const tagArray = Array.isArray(note.tag) ? note.tag : [note.tag];
+      const tags = tagArray.map((tag: any) => {
+        const cleanTag = tag.toString().replace(/ /g, '-');
 
-    return `${EOL}${TAG_SECTION_SEPARATOR}${EOL}Tag(s): ${tags.join(' ')}${EOL}${EOL}${TAG_SECTION_SEPARATOR}${EOL}${EOL}`;
+        return cleanTag.startsWith('#') ? cleanTag : `#${cleanTag}`;
+      });
+
+      return `${EOL}${TAG_SECTION_SEPARATOR}${EOL}Tag(s): ${tags.join(' ')}${EOL}${EOL}${TAG_SECTION_SEPARATOR}${EOL}${EOL}`;
+    }
+    
   }
 
   return '';
